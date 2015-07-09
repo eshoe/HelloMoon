@@ -13,6 +13,13 @@ public class HelloMoonActivity extends Activity {
     ImageView image;
     int picture;
 
+    AudioPlayer player = new AudioPlayer();
+
+    void updateButtons() {
+        boolean isEnabled = !player.isPlaying();
+        playButton.setEnabled(isEnabled);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,13 +33,17 @@ public class HelloMoonActivity extends Activity {
 
         playButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(HelloMoonActivity.this, R.string.hellomoon_toast_play, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(HelloMoonActivity.this, R.string.hellomoon_toast_play, Toast.LENGTH_SHORT).show();
+                player.play(HelloMoonActivity.this);
+                updateButtons();
             }
         });
 
         stopButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(HelloMoonActivity.this, R.string.hellomoon_toast_stop, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(HelloMoonActivity.this, R.string.hellomoon_toast_stop, Toast.LENGTH_SHORT).show();
+                player.stop();
+                updateButtons();
             }
         });
 
@@ -43,6 +54,12 @@ public class HelloMoonActivity extends Activity {
         });
 
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        player.stop();
     }
 
 }
