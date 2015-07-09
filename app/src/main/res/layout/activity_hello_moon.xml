@@ -3,11 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <ImageView android:id="@+id/hellomoon_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:src="@mipmap/armstrong_on_moon"
         android:scaleType="centerInside"
         android:contentDescription="@string/hellomoon_image_description"
         />
