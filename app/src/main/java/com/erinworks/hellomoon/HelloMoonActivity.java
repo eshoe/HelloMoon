@@ -10,6 +10,7 @@ import android.widget.ImageView;
 public class HelloMoonActivity extends Activity {
     Button playButton;
     Button stopButton;
+    Button pauseButton;
     ImageView image;
     int picture;
 
@@ -18,6 +19,7 @@ public class HelloMoonActivity extends Activity {
     void updateButtons() {
         boolean isEnabled = !player.isPlaying();
         playButton.setEnabled(isEnabled);
+        pauseButton.setEnabled(!isEnabled);
     }
 
     @Override
@@ -30,6 +32,8 @@ public class HelloMoonActivity extends Activity {
         image.setImageResource(picture);
         playButton = (Button)findViewById(R.id.hellomoon_playButton);
         stopButton = (Button)findViewById(R.id.hellomoon_stopButton);
+        pauseButton = (Button)findViewById(R.id.hellomoon_pauseButton);
+        pauseButton.setEnabled(false);
 
         playButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -43,6 +47,13 @@ public class HelloMoonActivity extends Activity {
             public void onClick(View v) {
                 //Toast.makeText(HelloMoonActivity.this, R.string.hellomoon_toast_stop, Toast.LENGTH_SHORT).show();
                 player.stop();
+                updateButtons();
+            }
+        });
+
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                player.pause();
                 updateButtons();
             }
         });
